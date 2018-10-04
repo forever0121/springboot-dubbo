@@ -1,0 +1,73 @@
+server:
+  port: 8082
+spring:
+  dubbo:
+    application:
+      name: provider
+    registry:
+      address: zookeeper://localhost:2181
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: com.forever.service
+  datasource:
+    type: com.alibaba.druid.pool.xa.DruidXADataSource
+    druid:
+      one:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+        username: root
+        password: 123456
+#        type: com.alibaba.druid.pool.DruidDataSource
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 1 from dual
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat, wall
+      two:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/test1?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+        username: root
+        password: 123456
+    #    type: com.alibaba.druid.pool.DruidDataSource
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 1 from dual
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat, wall
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-active: 20
+      max-idle: 20
+      min-idle: 1
+      max-wait: 60000
+    database: 0
+  jta:
+    log-dir: tx-logs
+    transaction-manager-id: txManager
+mybatis:
+  type-aliases-package: com.forever.domain
+  mapper-locations: classpath*:mapping/luckcloud/one/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+
